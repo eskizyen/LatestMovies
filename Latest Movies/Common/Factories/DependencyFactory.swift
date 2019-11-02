@@ -10,10 +10,14 @@ import Foundation
 
 protocol DependencyFactoryProtocol {
     var viewFactory: ViewControllerFactoryProtocol { get }
+    var movieFetcher: MovieFetcherProtocol { get }
 }
 
 struct DependencyFactory: DependencyFactoryProtocol {
     var viewFactory: ViewControllerFactoryProtocol {
         ViewControllerFactory.shared
+    }
+    var movieFetcher: MovieFetcherProtocol {
+        MovieDBFetcher.shared
     }
 }

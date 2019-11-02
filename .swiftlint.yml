@@ -62,7 +62,9 @@ nesting:
   type_level: 3
 
 identifier_name:
+  allowed_symbols: "_"
   excluded:
     - i
     - j
     - k
+    - id

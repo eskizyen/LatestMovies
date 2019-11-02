@@ -12,6 +12,11 @@ protocol FlowControllerProtocol: UIViewController {
     var dependency: DependencyFactoryProtocol { get }
 }
 
+protocol AlertProtocol {
+    func alert(message: String?)
+    func alert(title: String?, message: String?)
+}
+
 class FlowController: UIViewController, FlowControllerProtocol {
     let dependency: DependencyFactoryProtocol
     
@@ -34,5 +39,17 @@ class FlowController: UIViewController, FlowControllerProtocol {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         children.first?.view.frame = view.bounds
+    }
+}
+
+extension FlowController: AlertProtocol {
+    func alert(message: String?) {
+        alert(title: nil, message: message)
+    }
+    
+    func alert(title: String?, message: String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Alert ok title"), style: .cancel, handler: nil))
+        present(alert, animated: true)
     }
 }

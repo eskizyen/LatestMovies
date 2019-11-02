@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol MovieListRouterProtocol {
+protocol MovieListRouterProtocol: AlertProtocol {
     func routeToMovieDetail()
 }

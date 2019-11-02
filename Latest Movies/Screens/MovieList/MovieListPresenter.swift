@@ -9,10 +9,22 @@
 import UIKit
 
 protocol MovieListPresentationLogic {
-    
+    func showError(message: String)
+    func show(movies: [MovieEntity])
 }
 
 class MovieListPresenter: MovieListPresentationLogic {
     weak var viewController: MovieListDisplayLogic?
     
+    func showError(message: String) {
+        viewController?.showError(message: message)
+    }
+    
+    func show(movies: [MovieEntity]) {
+        for movie in movies {
+            print("---")
+            print(movie.poster?.absoluteString ?? "")
+            print(movie.backdrop?.absoluteString ?? "")
+        }
+    }
 }

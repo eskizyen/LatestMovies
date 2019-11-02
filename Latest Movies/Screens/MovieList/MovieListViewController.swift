@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MovieListDisplayLogic: class {
-  
+    func showError(message: String)
 }
 
 class MovieListViewController: UITableViewController, MovieListDisplayLogic {
@@ -41,11 +41,15 @@ class MovieListViewController: UITableViewController, MovieListDisplayLogic {
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        interactor?.fetchLatestMovies(at: 1)
     }
     
     @objc private func tapDetail() {
         router?.routeToMovieDetail()
     }
-  
+    
+    // MARK: Display Logic
+    func showError(message: String) {
+        router?.alert(message: message)
+    }
 }

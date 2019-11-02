@@ -9,7 +9,13 @@
 import UIKit
 
 class MovieListWorker {
-    func doSomeWork() {
-
+    let movieFetcher: MovieFetcherProtocol
+    
+    init(movieFetcher: MovieFetcherProtocol) {
+        self.movieFetcher = movieFetcher
+    }
+    
+    func fetchLatestMovies(at page: Int) throws -> (pages: Int?, movies: [MovieEntity]) {
+        return try movieFetcher.latestMovies(at: 1)
     }
 }
