@@ -7,6 +7,7 @@ target 'Latest Movies' do
 
   # Pods for Latest Movies
   pod 'SwiftLint'
+  pod 'SDWebImage'
 
   target 'Latest MoviesTests' do
     inherit! :search_paths
