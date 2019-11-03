@@ -24,7 +24,13 @@ class MoviesFlowController: FlowController {
     // MARK: Routing
     private func list(animated: Bool) {
         navigation.pushViewController(
-            dependency.viewFactory.movieList(with: self, movieFetcher: dependency.movieFetcher),
+            dependency.viewFactory.movieList(
+                with: self,
+                dependency: MovieList.Dependency(
+                    movieFetcher: dependency.movieFetcher,
+                    posterRatio: dependency.posterRatio
+                )
+            ),
             animated: animated
         )
     }

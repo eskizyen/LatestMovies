@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ViewControllerFactoryProtocol {
-    func movieList(with router: MovieListRouterProtocol, movieFetcher: MovieFetcherProtocol) -> UIViewController
+    func movieList(with router: MovieListRouterProtocol, dependency: MovieList.Dependency) -> UIViewController
     func movieDetail() -> UIViewController
 }
 
@@ -18,9 +18,9 @@ struct ViewControllerFactory: ViewControllerFactoryProtocol {
     
     private init() { }
     
-    func movieList(with router: MovieListRouterProtocol, movieFetcher: MovieFetcherProtocol) -> UIViewController {
-        let viewController = MovieListViewController(nibName: nil, bundle: nil)
-        let interactor = MovieListInteractor(movieFetcher: movieFetcher)
+    func movieList(with router: MovieListRouterProtocol, dependency: MovieList.Dependency) -> UIViewController {
+        let viewController = MovieListViewController(posterRatio: dependency.posterRatio)
+        let interactor = MovieListInteractor(movieFetcher: dependency.movieFetcher)
         let presenter = MovieListPresenter()
         
         viewController.interactor = interactor

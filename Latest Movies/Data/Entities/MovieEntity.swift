@@ -13,4 +13,8 @@ struct MovieEntity {
     let backdrop: URL?
     let title: String?
     let originalTitle: String?
+    
+    func anyTitle() -> String? {
+        return title ?? originalTitle
+    }
 }

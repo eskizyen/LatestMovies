@@ -16,6 +16,6 @@ class MovieListWorker {
     }
     
     func fetchLatestMovies(at page: Int) throws -> (pages: Int?, movies: [MovieEntity]) {
-        return try movieFetcher.latestMovies(at: 1)
+        return try movieFetcher.latestMovies(at: page)
     }
 }

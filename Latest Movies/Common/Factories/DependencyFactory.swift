@@ -11,6 +11,7 @@ import Foundation
 protocol DependencyFactoryProtocol {
     var viewFactory: ViewControllerFactoryProtocol { get }
     var movieFetcher: MovieFetcherProtocol { get }
+    var posterRatio: Float { get }
 }
 
 struct DependencyFactory: DependencyFactoryProtocol {
@@ -20,4 +21,5 @@ struct DependencyFactory: DependencyFactoryProtocol {
     var movieFetcher: MovieFetcherProtocol {
         MovieDBFetcher.shared
     }
+    var posterRatio: Float = 0.57
 }
