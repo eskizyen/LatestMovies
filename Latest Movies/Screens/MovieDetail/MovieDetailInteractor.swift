@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MovieDetailBusinessLogic {
-    
+    func fetchMovie()
 }
 
 protocol MovieDetailDataStore {
@@ -19,5 +19,13 @@ protocol MovieDetailDataStore {
 class MovieDetailInteractor: MovieDetailBusinessLogic, MovieDetailDataStore {
     var presenter: MovieDetailPresentationLogic?
     var worker: MovieDetailWorker?
+    private let movie: MovieEntity
     
+    init(_ movie: MovieEntity) {
+        self.movie = movie
+    }
+    
+    func fetchMovie() {
+        presenter?.set(movie: movie)
+    }
 }

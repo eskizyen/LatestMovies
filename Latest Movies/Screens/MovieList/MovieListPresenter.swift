@@ -58,7 +58,7 @@ class MovieListPresenter: MovieListPresentationLogic {
                 .movie(
                     model: MovieCell.ViewModel(
                         poster: movie.poster,
-                        title: movie.anyTitle()
+                        title: movie.prettyTitle()
                     )
                 )
             )

@@ -23,7 +23,7 @@ class MovieDB: Remote.Endpoint {
         let query = DiscoverMovieMethod.Query(
             api_key: apiKey,
             page: page,
-            sort_by: "release_date.asc",
+            sort_by: "release_date.desc",
             language: Locale.current.languageCode
         )
         

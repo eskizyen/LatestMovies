@@ -38,7 +38,11 @@ class MovieDBFetcher: MovieFetcherProtocol {
                     poster: poster,
                     backdrop: backdrop,
                     title: movie.title,
-                    originalTitle: movie.original_title
+                    originalTitle: movie.original_title,
+                    overview: movie.overview,
+                    rating: movie.vote_average,
+                    releaseDate: movie.release_date,
+                    originalLanguage: movie.original_language
                 )
             )
         }

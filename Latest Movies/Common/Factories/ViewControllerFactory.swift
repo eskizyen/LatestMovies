@@ -33,8 +33,8 @@ struct ViewControllerFactory: ViewControllerFactoryProtocol {
     }
     
     func movieDetail(_ movie: MovieEntity) -> UIViewController {
-        let viewController = MovieDetailViewController(movie)
-        let interactor = MovieDetailInteractor()
+        let viewController = MovieDetailViewController()
+        let interactor = MovieDetailInteractor(movie)
         let presenter = MovieDetailPresenter()
         
         viewController.interactor = interactor

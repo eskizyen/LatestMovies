@@ -9,14 +9,14 @@
 import UIKit
 
 enum MovieDetail {
-  // MARK: Use cases
-  
-  enum Something {
-    struct Request {
-    }
-    struct Response {
-    }
     struct ViewModel {
+        let poster: URL?
+        let backdrop: URL?
+        let overview: String
+        let year: String
+        let title: String
+        let originalTitle: String?
+        let originalLanguage: String
+        let rating: String
     }
-  }
 }
