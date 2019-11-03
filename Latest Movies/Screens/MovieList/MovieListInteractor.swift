@@ -38,6 +38,7 @@ class MovieListInteractor: MovieListBusinessLogic, MovieListDataStore {
         isLoading = false
         isRefresh = false
         movies.removeAll()
+        fetchLatestMovies()
     }
     
     func refresh() {
@@ -45,6 +46,7 @@ class MovieListInteractor: MovieListBusinessLogic, MovieListDataStore {
         totalPages = nil
         isLoading = false
         isRefresh = true
+        fetchLatestMovies()
     }
   
     func fetchLatestMovies() {
@@ -58,8 +60,6 @@ class MovieListInteractor: MovieListBusinessLogic, MovieListDataStore {
             DispatchQueue.main.async {
                 if self.movies.isEmpty {
                     self.presenter?.state = .loading
-                } else {
-                    self.presenter?.appendLoader()
                 }
             }
             
@@ -72,23 +72,27 @@ class MovieListInteractor: MovieListBusinessLogic, MovieListDataStore {
     private func fetchMovies(at page: Int) {
         do {
             if let response = try self.worker?.fetchLatestMovies(at: self.currentPage) {
-                if self.isRefresh {
-                    self.isRefresh = false
-                    self.movies.removeAll()
+                if isRefresh {
+                    movies.removeAll()
                 }
                 
-                self.currentPage += 1
-                self.totalPages = response.pages
-                self.movies += response.movies
+                currentPage += 1
+                totalPages = response.pages
+                movies += response.movies
                 
                 DispatchQueue.main.async {
-                    self.presenter?.removeLoader()
-                    self.presenter?.append(movies: response.movies)
+                    if self.isRefresh {
+                        self.isRefresh = false
+                        self.presenter?.set(movies: response.movies, isLast: self.currentPage == self.totalPages)
+                    } else {
+                        self.presenter?.append(movies: response.movies, isLast: self.currentPage == self.totalPages)
+                    }
+                    
                     self.presenter?.state = self.movies.isEmpty ? .empty : .collection
                 }
             }
         } catch let error {
-            self.currentPage -= 1
+            currentPage -= 1
             DispatchQueue.main.async {
                 self.presenter?.showError(message: error.localizedDescription)
             }

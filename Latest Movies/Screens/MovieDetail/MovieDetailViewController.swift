@@ -15,8 +15,8 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     var interactor: MovieDetailBusinessLogic?
     
     // MARK: Object lifecycle
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(_ movie: MovieEntity) {
+        super.init(nibName: "MovieDetailViewController", bundle: nil)
         setup()
     }
 
@@ -27,12 +27,17 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
 
     // MARK: Setup
     private func setup() {
-        title = "Movie Detail"
+        
     }
 
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
   
 }

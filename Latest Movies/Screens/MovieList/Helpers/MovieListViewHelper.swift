@@ -35,7 +35,7 @@ class MovieListViewHelper {
         collectionView.leadingAnchor.constraint(equalTo: viewController.view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: viewController.view.trailingAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: viewController.topLayoutGuide.bottomAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: viewController.bottomLayoutGuide.topAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: viewController.view.bottomAnchor).isActive = true
     }
     
     private func addLoadingView(in viewController: UIViewController) {
@@ -45,7 +45,7 @@ class MovieListViewHelper {
         loadingView.leadingAnchor.constraint(equalTo: viewController.view.leadingAnchor).isActive = true
         loadingView.trailingAnchor.constraint(equalTo: viewController.view.trailingAnchor).isActive = true
         loadingView.topAnchor.constraint(equalTo: viewController.topLayoutGuide.bottomAnchor).isActive = true
-        loadingView.bottomAnchor.constraint(equalTo: viewController.bottomLayoutGuide.topAnchor).isActive = true
+        loadingView.bottomAnchor.constraint(equalTo: viewController.view.bottomAnchor).isActive = true
     }
 
     private func addEmptyView(in viewController: UIViewController) {
@@ -55,6 +55,6 @@ class MovieListViewHelper {
         emptyView.leadingAnchor.constraint(equalTo: viewController.view.leadingAnchor).isActive = true
         emptyView.trailingAnchor.constraint(equalTo: viewController.view.trailingAnchor).isActive = true
         emptyView.topAnchor.constraint(equalTo: viewController.topLayoutGuide.bottomAnchor).isActive = true
-        emptyView.bottomAnchor.constraint(equalTo: viewController.bottomLayoutGuide.topAnchor).isActive = true
+        emptyView.bottomAnchor.constraint(equalTo: viewController.view.bottomAnchor).isActive = true
     }
 }

@@ -10,13 +10,14 @@ import UIKit
 
 protocol MovieListDisplayLogic: class {
     func showError(message: String)
+    func set(cells: [MovieList.Cell])
     func append(cells: [MovieList.Cell])
-    func removeLoadingCell()
     func set(state: MovieList.StateViewModel)
 }
 
 class MovieListViewController: UIViewController, MovieListDisplayLogic {
     var interactor: MovieListBusinessLogic?
+    var dataStore: MovieListDataStore?
     var router: MovieListRouterProtocol?
     let posterRatio: Float
     let viewHelper = MovieListViewHelper()
@@ -34,13 +35,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     
     // MARK: Setup
     private func setup() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "Detail",
-            style: .plain,
-            target: self,
-            action: #selector(tapDetail)
-        )
-        title = "Movie List"
+        
     }
     
     // MARK: View lifecycle
@@ -65,6 +60,11 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         interactor?.fetchLatestMovies()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -76,13 +76,8 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     }
     
     // MARK: Taps
-    @objc private func tapDetail() {
-        router?.routeToMovieDetail()
-    }
-    
     @objc private func tapRetry() {
         interactor?.reset()
-        interactor?.fetchLatestMovies()
     }
     
     // MARK: Display Logic
@@ -92,20 +87,22 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     
     private var cellModels = [MovieList.Cell]()
     
-    func append(cells: [MovieList.Cell]) {
+    func set(cells: [MovieList.Cell]) {
         if #available(iOS 10.0, *) {
             viewHelper.collectionView.refreshControl?.endRefreshing()
         }
-        cellModels += cells
+        
+        cellModels = cells
         viewHelper.collectionView.reloadData()
     }
     
-    func removeLoadingCell() {
-        guard let model = cellModels.last, model == .loading else {
-            return
+    func append(cells: [MovieList.Cell]) {
+        if let model = cellModels.last, model == .loading {
+            cellModels.removeLast()
         }
         
-        cellModels.removeLast()
+        cellModels += cells
+        
         viewHelper.collectionView.reloadData()
     }
     
@@ -136,7 +133,7 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
                 cell.willDisplay(model: model)
             }
             
-            if indexPath.row == cellModels.count - 1 {
+            if indexPath.row > cellModels.count - 10 {
                 interactor?.fetchLatestMovies()
             }
         case .loading:
@@ -147,6 +144,14 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
             break
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let movies = dataStore?.movies, indexPath.row < movies.count else {
+            return
+        }
+        
+        router?.routeToMovieDetail(movies[indexPath.row])
+    }
 }
 
 extension MovieListViewController: UIScrollViewDelegate {
@@ -154,7 +159,6 @@ extension MovieListViewController: UIScrollViewDelegate {
         if #available(iOS 10.0, *) {
             if let control = viewHelper.collectionView.refreshControl, control.isRefreshing {
                 interactor?.refresh()
-                interactor?.fetchLatestMovies()
             }
         }
     }

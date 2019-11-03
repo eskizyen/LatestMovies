@@ -844,8 +844,9 @@
 			baseConfigurationReference = 5D107F8FD5477FF4BA8510E2 /* Pods-Latest Movies.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z7JA67DPGC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Latest Movies/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -856,6 +857,7 @@
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.erkan.Latest-Movies";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -866,8 +868,9 @@
 			baseConfigurationReference = 18CF5336A3316E5FC613C9F8 /* Pods-Latest Movies.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z7JA67DPGC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Latest Movies/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -876,6 +879,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.erkan.Latest-Movies";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -35,9 +35,9 @@ class MoviesFlowController: FlowController {
         )
     }
     
-    private func detail(animated: Bool) {
+    private func detail(_ movie: MovieEntity, animated: Bool) {
         navigation.pushViewController(
-            dependency.viewFactory.movieDetail(),
+            dependency.viewFactory.movieDetail(movie),
             animated: animated
         )
     }
@@ -46,7 +46,7 @@ class MoviesFlowController: FlowController {
 
 // MARK: - MovieListRouterProtocol
 extension MoviesFlowController: MovieListRouterProtocol {
-    func routeToMovieDetail() {
-        detail(animated: true)
+    func routeToMovieDetail(_ movie: MovieEntity) {
+        detail(movie, animated: true)
     }
 }

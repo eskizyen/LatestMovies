@@ -9,5 +9,5 @@
 import Foundation
 
 protocol MovieListRouterProtocol: AlertProtocol {
-    func routeToMovieDetail()
+    func routeToMovieDetail(_ movie: MovieEntity)
 }

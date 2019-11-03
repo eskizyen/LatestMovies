@@ -12,9 +12,8 @@ protocol MovieListPresentationLogic {
     var state: MovieList.State { get set }
     
     func showError(message: String)
-    func append(movies: [MovieEntity])
-    func appendLoader()
-    func removeLoader()
+    func set(movies: [MovieEntity], isLast: Bool)
+    func append(movies: [MovieEntity], isLast: Bool)
 }
 
 class MovieListPresenter: MovieListPresentationLogic {
@@ -35,7 +34,23 @@ class MovieListPresenter: MovieListPresentationLogic {
         viewController?.showError(message: message)
     }
     
-    func append(movies: [MovieEntity]) {
+    func set(movies: [MovieEntity], isLast: Bool) {
+        viewController?.set(cells: cells(movies: movies))
+        
+        if !isLast {
+            viewController?.append(cells: [.loading])
+        }
+    }
+    
+    func append(movies: [MovieEntity], isLast: Bool) {
+        viewController?.append(cells: cells(movies: movies))
+        
+        if !isLast {
+            viewController?.append(cells: [.loading])
+        }
+    }
+    
+    private func cells(movies: [MovieEntity]) -> [MovieList.Cell] {
         var cells = [MovieList.Cell]()
         
         for movie in movies {
@@ -49,14 +64,6 @@ class MovieListPresenter: MovieListPresentationLogic {
             )
         }
         
-        viewController?.append(cells: cells)
-    }
-    
-    func appendLoader() {
-        viewController?.append(cells: [.loading])
-    }
-    
-    func removeLoader() {
-        viewController?.removeLoadingCell()
+        return cells
     }
 }

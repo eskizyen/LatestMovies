@@ -10,7 +10,7 @@ import UIKit
 
 protocol ViewControllerFactoryProtocol {
     func movieList(with router: MovieListRouterProtocol, dependency: MovieList.Dependency) -> UIViewController
-    func movieDetail() -> UIViewController
+    func movieDetail(_ movie: MovieEntity) -> UIViewController
 }
 
 struct ViewControllerFactory: ViewControllerFactoryProtocol {
@@ -24,6 +24,7 @@ struct ViewControllerFactory: ViewControllerFactoryProtocol {
         let presenter = MovieListPresenter()
         
         viewController.interactor = interactor
+        viewController.dataStore = interactor
         viewController.router = router
         interactor.presenter = presenter
         presenter.viewController = viewController
@@ -31,8 +32,8 @@ struct ViewControllerFactory: ViewControllerFactoryProtocol {
         return viewController
     }
     
-    func movieDetail() -> UIViewController {
-        let viewController = MovieDetailViewController(nibName: "MovieDetailViewController", bundle: nil)
+    func movieDetail(_ movie: MovieEntity) -> UIViewController {
+        let viewController = MovieDetailViewController(movie)
         let interactor = MovieDetailInteractor()
         let presenter = MovieDetailPresenter()
         
