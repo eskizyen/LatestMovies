@@ -70,7 +70,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         
         if let layout = viewHelper.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             let width = floor((UIScreen.main.bounds.width - 10) / 3)
-            layout.itemSize = CGSize(width: width, height: width / CGFloat(posterRatio))
+            layout.itemSize = CGSize(width: width, height: floor(width / CGFloat(posterRatio)))
             viewHelper.collectionView.setCollectionViewLayout(layout, animated: false)
         }
     }
